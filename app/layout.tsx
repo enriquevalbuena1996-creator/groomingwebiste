@@ -1,24 +1,31 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { site } from '@/lib/site'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-montserrat',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Paws & Shine Mobile Dog Grooming | Professional At-Home Pet Care',
-  description: 'Professional mobile dog grooming services at your doorstep. We bring comfort, convenience, and expert care directly to your home in Sarasota, Bradenton, Venice, and surrounding areas.',
-  keywords: 'mobile dog grooming, dog grooming at home, pet grooming, Sarasota dog grooming, Bradenton pet care',
+  title: `${site.name} | Professional At-Home Pet Care`,
+  description:
+    'Professional mobile dog grooming in Sarasota and surrounding areas. We bring comfort, convenience, and expert care directly to your home.',
+  keywords:
+    'mobile dog grooming, dog grooming at home, pet grooming, Sarasota dog grooming, Alfonso dog grooming',
   openGraph: {
-    title: 'Paws & Shine Mobile Dog Grooming',
+    title: site.name,
     description: 'Professional mobile dog grooming services at your doorstep.',
     type: 'website',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#2d9596',
+  themeColor: '#061528',
   width: 'device-width',
   initialScale: 1,
 }
@@ -29,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="en" className={`dark ${montserrat.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

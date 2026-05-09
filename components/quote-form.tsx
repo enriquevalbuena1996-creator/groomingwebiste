@@ -5,15 +5,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Send, CheckCircle } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const dogSizes = ['Small (under 20 lbs)', 'Medium (20-50 lbs)', 'Large (50-80 lbs)', 'Extra Large (80+ lbs)']
 const services = [
@@ -27,6 +21,13 @@ const services = [
   'Flea & Tick Bath',
 ]
 
+/** Select nativo con el mismo aspecto que los inputs (los Radix Select fallaban al abrir por z-index/portal). */
+const selectClassName = cn(
+  'border-input dark:bg-input/30 h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-2 text-sm text-foreground shadow-xs transition-[color,box-shadow] outline-none',
+  'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+  '[&>option]:bg-popover [&>option]:text-popover-foreground',
+)
+
 export function QuoteForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -34,7 +35,6 @@ export function QuoteForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setLoading(false)
     setSubmitted(true)
@@ -42,157 +42,113 @@ export function QuoteForm() {
 
   if (submitted) {
     return (
-      <section id="quote" className="bg-background py-16 sm:py-24">
+      <section id="quote" className="border-t border-accent/25 bg-secondary py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <Card className="border-primary/20 bg-primary/5">
-            <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-              <CheckCircle className="mb-4 size-16 text-primary" />
-              <h3 className="text-2xl font-bold text-foreground">Thank You!</h3>
-              <p className="mt-2 text-muted-foreground">
-                {"We've received your request and will contact you shortly."}
-              </p>
-              <Button
-                className="mt-6"
-                variant="outline"
-                onClick={() => setSubmitted(false)}
-              >
-                Submit Another Request
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="section-gold-frame px-5 py-10 sm:px-8">
+            <Card className="border-2 border-accent/50 bg-card shadow-lg">
+              <CardContent className="flex flex-col items-center justify-center py-16 text-center">
+                <CheckCircle className="mb-4 size-16 text-accent" />
+                <h3 className="font-heading text-2xl font-semibold text-foreground">Thank You!</h3>
+                <p className="mt-2 text-muted-foreground">
+                  {"We've received your request and will contact you shortly."}
+                </p>
+                <Button className="mt-6" variant="gold" onClick={() => setSubmitted(false)}>
+                  Submit Another Request
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
     )
   }
 
   return (
-    <section id="quote" className="bg-background py-16 sm:py-24">
+    <section id="quote" className="border-t border-accent/25 bg-secondary py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Request a Quote
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Fill out the form below and {"we'll"} get back to you with a personalized quote.
-          </p>
-        </div>
+        <div className="section-gold-frame px-5 py-10 sm:px-8">
+          <div className="text-center">
+            <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Request a Quote
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Fill out the form below and {"we'll"} get back to you with a personalized quote.
+            </p>
+          </div>
 
-        <Card className="mt-10">
-          <CardHeader>
-            <CardTitle>Booking Information</CardTitle>
-            <CardDescription>
+          <div className="mt-10">
+            <h3 className="font-heading text-center text-xl font-semibold text-foreground sm:text-left">
+              Booking Information
+            </h3>
+            <p className="mt-1.5 text-center text-sm text-muted-foreground sm:text-left">
               {"We'll"} contact you shortly after receiving your request.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Personal Information */}
+            </p>
+            <form onSubmit={handleSubmit} className="mt-6 space-y-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="fullName">Full Name *</Label>
-                  <Input
-                    id="fullName"
-                    name="fullName"
-                    placeholder="John Doe"
-                    required
-                  />
+                  <Input id="fullName" name="fullName" placeholder="John Doe" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number *</Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="(941) 555-1234"
-                    required
-                  />
+                  <Input id="phone" name="phone" type="tel" placeholder="(941) 402-9395" required />
                 </div>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address *</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    required
-                  />
+                  <Input id="email" name="email" type="email" placeholder="john@example.com" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="address">Address / City *</Label>
-                  <Input
-                    id="address"
-                    name="address"
-                    placeholder="123 Main St, Sarasota"
-                    required
-                  />
+                  <Input id="address" name="address" placeholder="123 Main St, Sarasota" required />
                 </div>
               </div>
 
-              {/* Dog Information */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="dogName">{"Dog's"} Name *</Label>
-                  <Input
-                    id="dogName"
-                    name="dogName"
-                    placeholder="Buddy"
-                    required
-                  />
+                  <Input id="dogName" name="dogName" placeholder="Buddy" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="dogBreed">Dog Breed *</Label>
-                  <Input
-                    id="dogBreed"
-                    name="dogBreed"
-                    placeholder="Golden Retriever"
-                    required
-                  />
+                  <Input id="dogBreed" name="dogBreed" placeholder="Golden Retriever" required />
                 </div>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="dogSize">Dog Size *</Label>
-                  <Select name="dogSize" required>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select size" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {dogSizes.map((size) => (
-                        <SelectItem key={size} value={size}>
-                          {size}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <select id="dogSize" name="dogSize" required defaultValue="" className={selectClassName}>
+                    <option value="" disabled>
+                      Select size
+                    </option>
+                    {dogSizes.map((size) => (
+                      <option key={size} value={size}>
+                        {size}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="service">Grooming Service Needed *</Label>
-                  <Select name="service" required>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select service" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {services.map((service) => (
-                        <SelectItem key={service} value={service}>
-                          {service}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <select id="service" name="service" required defaultValue="" className={selectClassName}>
+                    <option value="" disabled>
+                      Select service
+                    </option>
+                    {services.map((service) => (
+                      <option key={service} value={service}>
+                        {service}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="preferredDate">Preferred Date</Label>
-                <Input
-                  id="preferredDate"
-                  name="preferredDate"
-                  type="date"
-                />
+                <Input id="preferredDate" name="preferredDate" type="date" />
               </div>
 
               <div className="space-y-2">
@@ -205,7 +161,7 @@ export function QuoteForm() {
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full" disabled={loading}>
+              <Button type="submit" size="lg" variant="gold" className="w-full" disabled={loading}>
                 {loading ? (
                   'Sending...'
                 ) : (
@@ -216,8 +172,8 @@ export function QuoteForm() {
                 )}
               </Button>
             </form>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </section>
   )

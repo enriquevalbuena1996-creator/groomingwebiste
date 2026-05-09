@@ -1,5 +1,7 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { PawPrint, Phone, Mail } from 'lucide-react'
+import { Phone, MapPin } from 'lucide-react'
+import { site } from '@/lib/site'
 
 const quickLinks = [
   { href: '#services', label: 'Services' },
@@ -11,30 +13,42 @@ const quickLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t bg-card">
+    <footer className="site-footer-brand bg-brand-navy text-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-3">
-          {/* Brand */}
+        <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <Link href="/" className="flex items-center gap-2">
-              <PawPrint className="size-8 text-primary" />
-              <span className="text-xl font-bold text-foreground">Paws & Shine</span>
+            <Link href="/" className="inline-flex min-w-0 items-center gap-3">
+              <Image
+                src={site.logoSrc}
+                alt=""
+                width={200}
+                height={94}
+                className="h-16 w-auto max-w-[180px] shrink-0 object-contain object-left opacity-95 drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:max-w-[240px]"
+                aria-hidden
+              />
+              <span className="min-w-0 font-semibold uppercase leading-tight tracking-wide text-white">
+                <span className="flex flex-col gap-0.5 sm:hidden">
+                  {site.nameLines.map((line) => (
+                    <span key={line}>{line.toUpperCase()}</span>
+                  ))}
+                </span>
+                <span className="hidden sm:inline">{site.name.toUpperCase()}</span>
+              </span>
             </Link>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Professional mobile dog grooming services at your doorstep. 
-              We bring comfort and quality care to your furry friend.
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
+              Professional mobile dog grooming at your doorstep — the comfort of home with the polish of a luxury
+              salon.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-foreground">Quick Links</h3>
+            <h3 className="font-heading text-lg font-semibold tracking-wide text-white">Quick Links</h3>
             <nav className="mt-4 flex flex-col space-y-2">
               {quickLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="text-sm text-white/70 transition-colors hover:text-accent"
                 >
                   {link.label}
                 </Link>
@@ -42,30 +56,33 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Contact */}
           <div>
-            <h3 className="font-semibold text-foreground">Contact Us</h3>
+            <h3 className="font-heading text-lg font-semibold tracking-wide text-white">Contact Us</h3>
             <div className="mt-4 space-y-3">
               <a
-                href="tel:+19415551234"
-                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+                href={`tel:${site.phoneTel}`}
+                className="flex items-center gap-2 text-sm text-white/75 transition-colors hover:text-accent"
               >
-                <Phone className="size-4" />
-                (941) 555-1234
+                <Phone className="size-4 shrink-0 text-accent" />
+                {site.phoneDisplay}
               </a>
               <a
-                href="mailto:hello@pawsandshine.com"
-                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+                href={site.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 text-sm text-white/75 transition-colors hover:text-accent"
               >
-                <Mail className="size-4" />
-                hello@pawsandshine.com
+                <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
+                {site.addressLine}
               </a>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Paws & Shine Mobile Dog Grooming. All rights reserved.</p>
+        <div className="mt-10 border-t border-white/15 pt-8 text-center text-sm text-white/55">
+          <p>
+            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

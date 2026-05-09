@@ -46,34 +46,39 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="bg-background py-16 sm:py-24">
+    <section id="services" className="border-t border-accent/25 bg-background py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Our Services
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            We offer a full range of professional grooming services to keep your furry friend 
-            looking and feeling their best.
-          </p>
-        </div>
+        <div className="section-gold-frame px-5 py-10 sm:px-8 sm:py-12">
+          <div className="text-center">
+            <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Our Services
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              We offer a full range of professional grooming services to keep your furry friend looking and feeling their
+              best.
+            </p>
+          </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => (
-            <Card key={service.title} className="group transition-shadow hover:shadow-lg">
-              <CardHeader className="pb-4">
-                <div className="mb-3 flex size-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20">
-                  <service.icon className="size-6 text-primary" />
-                </div>
-                <CardTitle className="text-lg">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <CardDescription className="text-sm leading-relaxed">
-                  {service.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((service) => (
+              <Card
+                key={service.title}
+                className="group border-2 border-accent/45 bg-card/90 shadow-md transition-all hover:border-accent hover:shadow-[0_0_28px_-6px_oklch(0.76_0.17_82_/_0.45)]"
+              >
+                <CardHeader className="pb-4">
+                  <div className="mb-3 flex size-12 items-center justify-center rounded-xl bg-accent text-accent-foreground shadow-inner ring-2 ring-accent/40 transition-colors">
+                    <service.icon className="size-6" />
+                  </div>
+                  <CardTitle className="text-lg">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <CardDescription className="text-sm leading-relaxed">
+                    {service.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>

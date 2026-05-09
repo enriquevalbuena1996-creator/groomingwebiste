@@ -23,7 +23,7 @@ export const site = {
     reviewCount: 197,
   },
 
-  /** Yelp business listing */
+  /** Yelp — logo en `public/logoyelp2.webp` (ideal: burst en color sobre fondo transparente; si hay halo blanco, ver `mix-blend-multiply` en Contact/Footer). */
   yelpUrl: 'https://www.yelp.com/biz/alfonsos-mobile-grooming-sarasota',
   yelpLogoSrc: '/logoyelp2.webp',
   /** Portada: archivo en `public/` (nombre largo de Firefly export) */

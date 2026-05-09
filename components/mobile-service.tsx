@@ -22,9 +22,9 @@ const vanIncludes = [
 
 export function MobileService() {
   return (
-    <section id="mobile-service" className="border-t border-accent/25 bg-secondary py-16 sm:py-24">
+    <section id="mobile-service" className="surface-band-light border-t border-accent/25 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="section-gold-frame px-5 py-10 sm:px-8 sm:py-12">
+        <div className="px-5 py-10 sm:px-8 sm:py-12">
           <div className="flex flex-col items-center text-center">
             <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
               <Truck className="size-3.5" aria-hidden />

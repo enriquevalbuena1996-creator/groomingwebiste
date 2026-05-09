@@ -79,7 +79,7 @@ export function QuoteForm() {
     return (
       <section id="quote" className="surface-band-light border-t border-accent/25 py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="section-gold-frame px-5 py-10 sm:px-8">
+          <div className="quote-form-gold-frame px-5 py-10 sm:px-8">
             <Card className="border-2 border-accent/50 bg-card shadow-lg">
               <CardContent className="flex flex-col items-center justify-center py-16 text-center">
                 <CheckCircle className="mb-4 size-16 text-accent" />
@@ -101,7 +101,7 @@ export function QuoteForm() {
   return (
     <section id="quote" className="surface-band-light border-t border-accent/25 py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="section-gold-frame px-5 py-10 sm:px-8">
+        <div className="quote-form-gold-frame px-5 py-10 sm:px-8">
           <div className="text-center">
             <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Treat Your Pet to Premium Grooming
@@ -112,10 +112,10 @@ export function QuoteForm() {
           </div>
 
           <div className="mt-10">
-            <h3 className="font-heading text-center text-xl font-semibold text-foreground sm:text-left">
+            <h3 className="font-heading text-center text-xl font-semibold text-foreground">
               Booking Information
             </h3>
-            <p className="mt-1.5 text-center text-sm text-muted-foreground sm:text-left">
+            <p className="mt-1.5 text-center text-sm text-muted-foreground">
               {"We'll"} contact you shortly after receiving your request.
             </p>
             <form onSubmit={handleSubmit} className="mt-6 space-y-6">

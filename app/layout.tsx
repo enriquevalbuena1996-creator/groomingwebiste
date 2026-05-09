@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { SiteJsonLd } from '@/components/json-ld'
+import { SplashRoot } from '@/components/splash-root'
 import { site } from '@/lib/site'
 import { getSiteUrl } from '@/lib/site-url'
 
@@ -98,6 +99,7 @@ export default function RootLayout({
     <html lang="en-US" className={`dark ${montserrat.variable} bg-background`}>
       <body className="font-sans antialiased">
         <SiteJsonLd />
+        <SplashRoot />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

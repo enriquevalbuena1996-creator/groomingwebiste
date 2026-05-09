@@ -35,7 +35,7 @@ export function Contact() {
   return (
     <section id="contact" className="border-t border-accent/25 bg-background py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="section-gold-frame px-5 py-10 sm:px-8 sm:py-12">
+        <div className="px-5 py-10 sm:px-8 sm:py-12">
           <div className="text-center">
             <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Get In Touch
@@ -99,15 +99,15 @@ export function Contact() {
                   href={site.yelpUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex size-10 items-center justify-center rounded-full border-2 border-accent/60 bg-white p-1.5 transition-colors hover:border-accent hover:bg-white"
+                  className="flex size-10 items-center justify-center rounded-full border-2 border-accent/60 bg-accent/20 text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
                   aria-label="Read reviews on Yelp (opens in a new tab)"
                 >
                   <Image
                     src={site.yelpLogoSrc}
                     alt=""
-                    width={32}
-                    height={32}
-                    className="size-6 object-contain"
+                    width={128}
+                    height={128}
+                    className="h-7 w-7 object-contain brightness-125 saturate-150 contrast-105 drop-shadow-[0_0_10px_rgba(251,82,82,0.55)] sm:h-8 sm:w-8"
                     aria-hidden
                   />
                 </a>

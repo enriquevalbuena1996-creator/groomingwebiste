@@ -125,7 +125,7 @@ function ServiceMarketingCard({ service }: { service: ServiceItem }) {
   return (
     <Link
       href="/#quote"
-      className="group relative isolate flex aspect-[3/5] w-full overflow-hidden rounded-2xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)] ring-1 ring-black/15 outline-offset-4 transition-[transform,box-shadow] duration-300 hover:scale-[1.02] hover:shadow-[0_16px_48px_-14px_oklch(0.76_0.17_82_/_0.35)] focus-visible:outline-2 focus-visible:outline-accent sm:aspect-[10/13]"
+      className="group relative isolate flex aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)] ring-1 ring-black/15 outline-offset-4 transition-[transform,box-shadow] duration-300 hover:scale-[1.02] hover:shadow-[0_16px_48px_-14px_oklch(0.76_0.17_82_/_0.35)] focus-visible:outline-2 focus-visible:outline-accent sm:aspect-[3/4] lg:aspect-[10/13]"
       aria-labelledby={`svc-${sid}`}
     >
       {hasPhoto && service.imageFilename ? (
@@ -134,19 +134,19 @@ function ServiceMarketingCard({ service }: { service: ServiceItem }) {
         <ServicePlaceholderCard icon={service.icon} />
       )}
 
-      <div className="relative z-[1] flex h-full flex-col justify-end p-6 text-center sm:p-7">
-        <div className="flex flex-col items-center gap-3 pb-2">
+      <div className="relative z-[1] flex h-full flex-col justify-end p-4 text-center sm:p-7">
+        <div className="flex flex-col items-center gap-2 pb-1 sm:gap-3 sm:pb-2">
           <h3
             id={`svc-${sid}`}
-            className="font-heading text-balance text-xl font-bold leading-snug tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] sm:text-2xl"
+            className="font-heading text-balance text-lg font-bold leading-snug tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] sm:text-2xl"
           >
             {service.title}
           </h3>
-          <p className="max-w-[24ch] text-pretty text-sm leading-relaxed text-white/92 sm:max-w-[26ch] sm:text-[0.9375rem]">
+          <p className="line-clamp-3 max-w-[24ch] text-pretty text-xs leading-snug text-white/92 sm:line-clamp-none sm:max-w-[26ch] sm:text-[0.9375rem] sm:leading-relaxed">
             {service.description}
           </p>
         </div>
-        <span className="mt-5 inline-flex items-center justify-center gap-2 text-center text-sm font-bold tracking-wide text-white">
+        <span className="mt-3 inline-flex items-center justify-center gap-2 text-center text-xs font-bold tracking-wide text-white sm:mt-5 sm:text-sm">
           Learn more
           <ArrowRight
             className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
@@ -160,7 +160,7 @@ function ServiceMarketingCard({ service }: { service: ServiceItem }) {
 
 export function Services() {
   return (
-    <section id="services" className="surface-band-light border-t border-accent/25 py-16 sm:py-24">
+    <section id="services" className="border-t border-accent/25 bg-background py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Layout estilo “Screen Armors”: título centrado + raya accent, rejilla sobre fondo claro */}
         <div className="text-center">

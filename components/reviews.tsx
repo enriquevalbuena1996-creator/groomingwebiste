@@ -279,7 +279,7 @@ export function Reviews() {
   return (
     <section id="reviews" className="border-t border-accent/25 bg-background py-16 sm:py-24" aria-labelledby="reviews-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="section-gold-frame px-5 py-10 sm:px-8">
+        <div className="px-5 py-10 sm:px-8">
           <div className="text-center">
             <h2 id="reviews-heading" className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               20+ Years Grooming Sarasota&apos;s Pets

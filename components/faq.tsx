@@ -196,7 +196,7 @@ export function Faq() {
   return (
     <section id="faq" className="surface-band-light border-t border-accent/25 py-16 sm:py-24" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="section-gold-frame px-5 py-10 sm:px-8">
+        <div className="px-5 py-10 sm:px-8">
           <div className="text-center">
             <h2 id="faq-heading" className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Frequently Asked Questions

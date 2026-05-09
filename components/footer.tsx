@@ -106,15 +106,15 @@ export function Footer() {
                 href={site.yelpUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex size-11 items-center justify-center rounded-full border-2 border-white/35 bg-white p-1.5 transition-colors hover:border-accent"
+                className="inline-flex size-11 items-center justify-center rounded-full border-2 border-white/35 bg-white/10 text-white transition-colors hover:border-accent hover:bg-accent/20 hover:text-accent"
                 aria-label="Read reviews on Yelp — Alfonso's Mobile Grooming Sarasota (opens in a new tab)"
               >
                 <Image
                   src={site.yelpLogoSrc}
                   alt=""
-                  width={36}
-                  height={36}
-                  className="size-[1.35rem] object-contain sm:size-7"
+                  width={128}
+                  height={128}
+                  className="h-8 w-8 object-contain brightness-125 saturate-150 contrast-105 drop-shadow-[0_0_10px_rgba(251,82,82,0.55)] sm:h-9 sm:w-9"
                   aria-hidden
                 />
               </a>

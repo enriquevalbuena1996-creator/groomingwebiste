@@ -14,7 +14,7 @@ export function Areas() {
   return (
     <section id="areas" className="surface-band-light border-t border-accent/25 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="section-gold-frame px-5 py-10 sm:px-8 sm:py-12">
+        <div className="px-5 py-10 sm:px-8 sm:py-12">
           <div className="text-center">
             <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Areas We Serve

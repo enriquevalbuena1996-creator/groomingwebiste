@@ -28,9 +28,20 @@ export function About() {
   return (
     <section id="about" className="border-t border-accent/25 bg-background py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="section-gold-frame px-5 py-10 sm:px-8 sm:py-12">
+        <div className="space-y-12 px-5 py-10 sm:px-8 sm:py-12">
+          <div className="text-center">
+            <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Why Choose Alfonso&apos;s Dog Mobile Grooming?
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              {"We're"} a mobile dog grooming company dedicated to providing stress-free, high-quality grooming services
+              right at your doorstep. We understand that every dog is unique, which is why we focus on comfort,
+              convenience, safety, and personalized care for every furry client.
+            </p>
+          </div>
+
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div className="relative order-2 lg:order-1">
+            <div className="relative lg:order-1">
               <div className="overflow-hidden rounded-2xl shadow-lg">
                 <Image
                   src="/esta.jpg"
@@ -42,17 +53,8 @@ export function About() {
               </div>
             </div>
 
-            <div className="order-1 lg:order-2">
-              <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                Why Choose Alfonso&apos;s Dog Mobile Grooming?
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                {"We're"} a mobile dog grooming company dedicated to providing stress-free, high-quality grooming services
-                right at your doorstep. We understand that every dog is unique, which is why we focus on comfort,
-                convenience, safety, and personalized care for every furry client.
-              </p>
-
-              <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            <div className="lg:order-2">
+              <div className="grid gap-6 sm:grid-cols-2">
                 {features.map((feature) => (
                   <div
                     key={feature.title}
@@ -61,7 +63,7 @@ export function About() {
                     <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground shadow-md ring-2 ring-accent/35">
                       <feature.icon className="size-6" />
                     </div>
-                    <div>
+                    <div className="min-w-0 text-left">
                       <h3 className="font-semibold text-foreground">{feature.title}</h3>
                       <p className="mt-1 text-sm text-muted-foreground">{feature.description}</p>
                     </div>

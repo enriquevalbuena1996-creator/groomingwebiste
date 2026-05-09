@@ -148,7 +148,10 @@
     color: var(--foreground);
   }
 
-  .surface-band-light .section-gold-frame {
+  /** Marco dorado solo para la sección Request a Quote (franja clara). */
+  .quote-form-gold-frame {
+    border-radius: 1rem;
+    border: 2px solid var(--accent);
     background: linear-gradient(
       165deg,
       oklch(1 0 0 / 0.92) 0%,
@@ -158,21 +161,6 @@
       0 0 0 1px oklch(0.76 0.17 82 / 0.35),
       0 0 36px -12px oklch(0.76 0.17 82 / 0.28),
       inset 0 1px 0 oklch(0.99 0.02 90 / 0.9);
-  }
-
-  /** Marco dorado doble (secciones desde Our Services) */
-  .section-gold-frame {
-    border-radius: 1rem;
-    border: 2px solid var(--accent);
-    background: linear-gradient(
-      165deg,
-      oklch(0.22 0.05 264 / 0.55) 0%,
-      oklch(0.17 0.05 264 / 0.35) 100%
-    );
-    box-shadow:
-      0 0 0 1px oklch(0.76 0.17 82 / 0.22),
-      0 0 42px -10px oklch(0.76 0.17 82 / 0.38),
-      inset 0 1px 0 oklch(0.92 0.12 82 / 0.12);
   }
 
   /** Reviews — carril horizontal infinito (mitad duplicada en el DOM / -50%) */

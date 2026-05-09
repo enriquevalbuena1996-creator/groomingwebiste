@@ -31,13 +31,48 @@ const selectClassName = cn(
 export function QuoteForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [sendError, setSendError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setLoading(false)
-    setSubmitted(true)
+    setSendError(null)
+
+    const form = e.currentTarget
+    const fd = new FormData(form)
+    const payload = {
+      fullName: String(fd.get('fullName') ?? '').trim(),
+      phone: String(fd.get('phone') ?? '').trim(),
+      email: String(fd.get('email') ?? '').trim(),
+      address: String(fd.get('address') ?? '').trim(),
+      dogName: String(fd.get('dogName') ?? '').trim(),
+      dogBreed: String(fd.get('dogBreed') ?? '').trim(),
+      dogSize: String(fd.get('dogSize') ?? '').trim(),
+      service: String(fd.get('service') ?? '').trim(),
+      preferredDate: String(fd.get('preferredDate') ?? '').trim(),
+      details: String(fd.get('details') ?? '').trim(),
+    }
+
+    try {
+      const res = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const data = (await res.json().catch(() => ({}))) as { error?: string }
+
+      if (!res.ok) {
+        setSendError(typeof data.error === 'string' ? data.error : 'Something went wrong. Please try again or call us.')
+        return
+      }
+
+      form.reset()
+      setSubmitted(true)
+    } catch {
+      setSendError('Network error. Please check your connection and try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -160,6 +195,12 @@ export function QuoteForm() {
                   rows={4}
                 />
               </div>
+
+              {sendError ? (
+                <p className="rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-center text-sm text-destructive" role="alert">
+                  {sendError}
+                </p>
+              ) : null}
 
               <Button type="submit" size="lg" variant="gold" className="w-full" disabled={loading}>
                 {loading ? (

@@ -102,6 +102,22 @@ export function Footer() {
               >
                 <BadgeCheck className="size-5" aria-hidden />
               </a>
+              <a
+                href={site.yelpUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex size-11 items-center justify-center rounded-full border-2 border-white/35 bg-white p-1.5 transition-colors hover:border-accent"
+                aria-label="Read reviews on Yelp — Alfonso's Mobile Grooming Sarasota (opens in a new tab)"
+              >
+                <Image
+                  src={site.yelpLogoSrc}
+                  alt=""
+                  width={36}
+                  height={36}
+                  className="size-[1.35rem] object-contain sm:size-7"
+                  aria-hidden
+                />
+              </a>
             </div>
             <p className="text-sm text-white/55">
               &copy; {new Date().getFullYear()} {site.name}. All rights reserved.

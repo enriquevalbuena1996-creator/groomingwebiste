@@ -22,6 +22,10 @@ export const site = {
     averageRating: 5,
     reviewCount: 197,
   },
+
+  /** Yelp business listing */
+  yelpUrl: 'https://www.yelp.com/biz/alfonsos-mobile-grooming-sarasota',
+  yelpLogoSrc: '/logoyelp2.webp',
   /** Portada: archivo en `public/` (nombre largo de Firefly export) */
   heroVideoSrc:
     '/Firefly Create a cinematic close-up video of a small curly brown toy poodle sitting calmly in a prof.mp4',

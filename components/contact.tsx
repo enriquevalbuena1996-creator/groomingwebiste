@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Phone, MapPin, Navigation, Clock, Facebook, Instagram, BadgeCheck } from 'lucide-react'
@@ -93,6 +94,22 @@ export function Contact() {
                   aria-label="Thumbtack — reviews and verified profile"
                 >
                   <BadgeCheck className="size-5" />
+                </a>
+                <a
+                  href={site.yelpUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex size-10 items-center justify-center rounded-full border-2 border-accent/60 bg-white p-1.5 transition-colors hover:border-accent hover:bg-white"
+                  aria-label="Read reviews on Yelp (opens in a new tab)"
+                >
+                  <Image
+                    src={site.yelpLogoSrc}
+                    alt=""
+                    width={32}
+                    height={32}
+                    className="size-6 object-contain"
+                    aria-hidden
+                  />
                 </a>
                 <a
                   href="#"

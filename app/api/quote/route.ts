@@ -26,6 +26,29 @@ function escapeHtml(text: string) {
     .replaceAll('"', '&quot;')
 }
 
+/** Quote display name for RFC 5322-style `From` (apostrophes/spaces inside the name must be quoted). */
+function quoteDisplayName(name: string): string {
+  const safe = name.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+  return `"${safe}"`
+}
+
+/** Env value looks like plain `addr@verified.domain` — wrap with branded display name. */
+function looksLikeBareEmail(s: string): boolean {
+  const t = s.trim()
+  return !/[<>]/.test(t) && /^[^\s@]+@[^\s@]+$/.test(t)
+}
+
+function resendPublicError(error: unknown): string {
+  if (typeof error === 'object' && error !== null && 'message' in error) {
+    const msg = (error as { message?: unknown }).message
+    if (typeof msg === 'string') {
+      const t = msg.trim()
+      if (t.length > 0 && t.length <= 360) return t
+    }
+  }
+  return 'Failed to send email. Check sender domain and Resend logs.'
+}
+
 /** Resend idempotency key: max 256 chars; reuse client `Idempotency-Key` for safe retries */
 function quoteIdempotencyKey(request: Request): string {
   const header = request.headers.get('Idempotency-Key')?.trim()
@@ -40,9 +63,15 @@ function quoteIdempotencyKey(request: Request): string {
 function resolvedFromEmail(): string {
   const configured =
     process.env.RESEND_FROM_EMAIL?.trim() || process.env.FROM_EMAIL?.trim()
-  if (configured) return configured
 
-  const fallback = `${site.name} <onboarding@resend.dev>`
+  if (configured) {
+    if (!configured.includes('<') && looksLikeBareEmail(configured)) {
+      return `${quoteDisplayName(site.name)} <${configured}>`
+    }
+    return configured
+  }
+
+  const fallback = `${quoteDisplayName(site.name)} <onboarding@resend.dev>`
   if (process.env.NODE_ENV === 'production') {
     console.warn(
       'RESEND_FROM_EMAIL / FROM_EMAIL is unset — using onboarding@resend.dev. Add a verified sender in Resend + Vercel for reliable delivery.'
@@ -119,7 +148,7 @@ export async function POST(request: Request) {
 
   if (error) {
     console.error('Resend error:', error)
-    return NextResponse.json({ error: 'Failed to send email.' }, { status: 502 })
+    return NextResponse.json({ error: resendPublicError(error) }, { status: 502 })
   }
 
   return NextResponse.json({ ok: true, id: data?.id })

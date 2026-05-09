@@ -38,6 +38,55 @@ function looksLikeBareEmail(s: string): boolean {
   return !/[<>]/.test(t) && /^[^\s@]+@[^\s@]+$/.test(t)
 }
 
+/** Address inside `Display <addr>` or bare `addr`; Resend cannot send FROM @gmail / @yahoo etc. (not verifiable domains). */
+function extractMailbox(fromHeader: string): string | null {
+  const m = fromHeader.match(/<([\s\S]*?)>/)
+  if (m) {
+    const inner = m[1].trim().replace(/^mailto:/i, '')
+    if (looksLikeBareEmail(inner)) return inner.trim()
+  }
+  const t = fromHeader.trim().replace(/^mailto:/i, '')
+  return looksLikeBareEmail(t) ? t : null
+}
+
+const NON_VERIFIABLE_FROM_DOMAINS = new Set(
+  (
+    [
+      'gmail.com',
+      'googlemail.com',
+      'hotmail.com',
+      'hotmail.es',
+      'hotmail.fr',
+      'hotmail.co.uk',
+      'outlook.com',
+      'live.com',
+      'msn.com',
+      'yahoo.com',
+      'yahoo.es',
+      'yahoo.co.uk',
+      'ymail.com',
+      'icloud.com',
+      'me.com',
+      'mac.com',
+      'aol.com',
+      'proton.me',
+      'protonmail.com',
+      'gmx.com',
+      'mail.com',
+    ] as const
+  ).map((h) => h.toLowerCase()),
+)
+
+function mailboxUsesNonVerifiableDomain(mailbox: string): boolean {
+  const at = mailbox.lastIndexOf('@')
+  const domain = at === -1 ? '' : mailbox.slice(at + 1).toLowerCase().trim()
+  return domain !== '' && NON_VERIFIABLE_FROM_DOMAINS.has(domain)
+}
+
+function onboardingFromResolved(): string {
+  return `${quoteDisplayName(site.name)} <onboarding@resend.dev>`
+}
+
 function resendPublicError(error: unknown): string {
   if (typeof error === 'object' && error !== null && 'message' in error) {
     const msg = (error as { message?: unknown }).message
@@ -61,23 +110,33 @@ function quoteIdempotencyKey(request: Request): string {
  * If unset, falls back to onboarding@resend.dev (test-only; verify a domain sender for production).
  */
 function resolvedFromEmail(): string {
+  const onboarding = onboardingFromResolved()
   const configured =
     process.env.RESEND_FROM_EMAIL?.trim() || process.env.FROM_EMAIL?.trim()
 
-  if (configured) {
-    if (!configured.includes('<') && looksLikeBareEmail(configured)) {
-      return `${quoteDisplayName(site.name)} <${configured}>`
+  if (!configured) {
+    if (process.env.NODE_ENV === 'production') {
+      console.warn(
+        'RESEND_FROM_EMAIL / FROM_EMAIL is unset — using onboarding@resend.dev. Add a verified sender in Resend + Vercel for reliable delivery.'
+      )
     }
-    return configured
+    return onboarding
   }
 
-  const fallback = `${quoteDisplayName(site.name)} <onboarding@resend.dev>`
-  if (process.env.NODE_ENV === 'production') {
+  let from: string =
+    !configured.includes('<') && looksLikeBareEmail(configured)
+      ? `${quoteDisplayName(site.name)} <${configured}>`
+      : configured
+
+  const mailbox = extractMailbox(from)
+  if (mailbox && mailboxUsesNonVerifiableDomain(mailbox)) {
     console.warn(
-      'RESEND_FROM_EMAIL / FROM_EMAIL is unset — using onboarding@resend.dev. Add a verified sender in Resend + Vercel for reliable delivery.'
+      `FROM_EMAIL / RESEND_FROM_EMAIL uses "${mailbox}", a public inbox Resend cannot verify. Falling back to onboarding@resend.dev. Add DNS for your own domain in Resend and set FROM_EMAIL to e.g. noreply@yourdomain.com.`,
     )
+    return onboarding
   }
-  return fallback
+
+  return from
 }
 
 export async function POST(request: Request) {

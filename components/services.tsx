@@ -67,11 +67,13 @@ const services: ServiceItem[] = [
     title: 'Senior Dog Grooming',
     description:
       'Extra patience and pacing for seniors—mobility-aware handling and breed-appropriate trims.',
+    imageFilename: 'senior.jpg',
   },
   {
     icon: Bug,
     title: 'Flea & Tick Bath',
     description: 'Medicated bathing to tackle fleas and ticks and leave your pup comfortable again.',
+    imageFilename: 'flea.jpg',
   },
 ]
 

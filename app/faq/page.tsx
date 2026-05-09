@@ -6,13 +6,21 @@ import { StickyFloatingActions } from '@/components/sticky-floating-actions'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: `FAQ | ${site.name}`,
+  title: 'FAQ',
   description:
-    "Answers about Alfonso's Dog Mobile Grooming: service areas, how mobile grooming works, pricing, booking, breeds, sanitation, and more.",
+    "FAQ for Alfonso's Dog Mobile Grooming: Sarasota & Manatee service area, how mobile grooming works, booking a van visit, pricing, breeds, safety, and what to expect.",
+  alternates: { canonical: '/faq' },
   openGraph: {
     title: `FAQ — ${site.name}`,
-    description: 'Frequently asked questions about mobile dog grooming in Sarasota & Manatee County.',
+    description:
+      'Answers about mobile dog grooming in Sarasota, Bradenton, and nearby — booking, pricing, and our grooming van.',
     type: 'website',
+    url: '/faq',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `FAQ — ${site.name}`,
+    description: 'Mobile grooming questions answered for Sarasota & Manatee County pet owners.',
   },
 }
 

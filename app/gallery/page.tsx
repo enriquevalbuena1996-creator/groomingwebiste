@@ -6,13 +6,21 @@ import { StickyFloatingActions } from '@/components/sticky-floating-actions'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: `Gallery | ${site.name}`,
+  title: 'Before & After Gallery',
   description:
-    "See professional before and after grooming results from Alfonso's Dog Mobile Grooming — Sarasota & Manatee County mobile grooming.",
+    "See real before-and-after dog grooming photos from Alfonso's Mobile Grooming in Sarasota & Manatee County — bath, haircut, styling and coat care at your home.",
+  alternates: { canonical: '/gallery' },
   openGraph: {
     title: `Before & After Gallery — ${site.name}`,
-    description: 'Real dog grooming transformations from our mobile grooming service.',
+    description:
+      'Mobile grooming transformations: same-day salon results from our fully equipped grooming van.',
     type: 'website',
+    url: '/gallery',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Before & After Gallery — ${site.name}`,
+    description: 'Real grooming results from our Sarasota-area mobile dog grooming service.',
   },
 }
 

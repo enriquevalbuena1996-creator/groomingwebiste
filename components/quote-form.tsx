@@ -182,7 +182,7 @@ export function QuoteForm() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="preferredDate">Preferred Date</Label>
+                <Label htmlFor="preferredDate">Preferred Date (may change based on availability)</Label>
                 <Input id="preferredDate" name="preferredDate" type="date" />
               </div>
 

@@ -282,9 +282,11 @@ export function Reviews() {
         <div className="section-gold-frame px-5 py-10 sm:px-8">
           <div className="text-center">
             <h2 id="reviews-heading" className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Loved by Sarasota Pet Parents
+              20+ Years Grooming Sarasota&apos;s Pets
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">Real feedback from neighbors who booked mobile grooming.</p>
+            <p className="mx-auto mt-4 max-w-3xl text-pretty text-lg leading-relaxed text-muted-foreground">
+              Thousands of happy dogs groomed with love, experience, and attention to detail.
+            </p>
           </div>
 
           <div

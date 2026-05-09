@@ -29,7 +29,8 @@ export const site = {
   /** Portada: archivo en `public/` (nombre largo de Firefly export) */
   heroVideoSrc:
     '/Firefly Create a cinematic close-up video of a small curly brown toy poodle sitting calmly in a prof.mp4',
-  heroPosterSrc: '/images/hero-dog.jpg',
+  /** Video poster + default social preview image (file must exist in `public/`) */
+  heroPosterSrc: '/esta.jpg',
   /** Logo PNG sin fondo (`public/logo-removebg-preview.png`) */
   logoSrc: '/logo-removebg-preview.png',
 } as const

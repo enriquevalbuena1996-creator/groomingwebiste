@@ -33,8 +33,8 @@ export function About() {
             <div className="relative order-2 lg:order-1">
               <div className="overflow-hidden rounded-2xl shadow-lg">
                 <Image
-                  src="/main.jpg"
-                  alt="Professional groomer with a happy dog in a stainless steel grooming tub"
+                  src="/esta.jpg"
+                  alt="Professional groomer posing a long-haired dachshund after grooming on a styling table"
                   width={1200}
                   height={800}
                   className="aspect-[4/3] object-cover"

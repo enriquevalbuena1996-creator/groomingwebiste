@@ -104,7 +104,7 @@ export function QuoteForm() {
         <div className="section-gold-frame px-5 py-10 sm:px-8">
           <div className="text-center">
             <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Request a Quote
+              Treat Your Pet to Premium Grooming
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
               Fill out the form below and {"we'll"} get back to you with a personalized quote.

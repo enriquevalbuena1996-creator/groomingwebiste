@@ -33,14 +33,22 @@ function quoteIdempotencyKey(request: Request): string {
   return `quote-request/${randomUUID()}`.slice(0, 256)
 }
 
-/** `from`: verified domain in production (`Name <noreply@yourdomain>` or plain email); dev fallback only */
-function resolvedFromEmail(): string | null {
-  const configured = process.env.RESEND_FROM_EMAIL?.trim()
+/**
+ * Prefer `RESEND_FROM_EMAIL`, or `FROM_EMAIL` (same value; some dashboards use the shorter name).
+ * If unset, falls back to onboarding@resend.dev (test-only; verify a domain sender for production).
+ */
+function resolvedFromEmail(): string {
+  const configured =
+    process.env.RESEND_FROM_EMAIL?.trim() || process.env.FROM_EMAIL?.trim()
   if (configured) return configured
-  if (process.env.NODE_ENV !== 'production') {
-    return `${site.name} <onboarding@resend.dev>`
+
+  const fallback = `${site.name} <onboarding@resend.dev>`
+  if (process.env.NODE_ENV === 'production') {
+    console.warn(
+      'RESEND_FROM_EMAIL / FROM_EMAIL is unset — using onboarding@resend.dev. Add a verified sender in Resend + Vercel for reliable delivery.'
+    )
   }
-  return null
+  return fallback
 }
 
 export async function POST(request: Request) {
@@ -52,14 +60,6 @@ export async function POST(request: Request) {
   if (!apiKey) {
     console.error('RESEND_API_KEY is not set')
     return NextResponse.json({ error: 'Email service is not configured.' }, { status: 503 })
-  }
-
-  if (!from) {
-    console.error('RESEND_FROM_EMAIL is not set (required in production)')
-    return NextResponse.json(
-      { error: 'Email sender is not configured (set RESEND_FROM_EMAIL to a verified domain address).' },
-      { status: 503 },
-    )
   }
 
   let json: unknown

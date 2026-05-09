@@ -77,7 +77,7 @@ export function QuoteForm() {
 
   if (submitted) {
     return (
-      <section id="quote" className="border-t border-accent/25 bg-secondary py-16 sm:py-24">
+      <section id="quote" className="surface-band-light border-t border-accent/25 py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="section-gold-frame px-5 py-10 sm:px-8">
             <Card className="border-2 border-accent/50 bg-card shadow-lg">
@@ -99,7 +99,7 @@ export function QuoteForm() {
   }
 
   return (
-    <section id="quote" className="border-t border-accent/25 bg-secondary py-16 sm:py-24">
+    <section id="quote" className="surface-band-light border-t border-accent/25 py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="section-gold-frame px-5 py-10 sm:px-8">
           <div className="text-center">

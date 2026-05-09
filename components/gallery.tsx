@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 export function Gallery() {
   return (
-    <section className="border-b border-accent/25 bg-secondary py-16 sm:py-24" aria-labelledby="gallery-heading">
+    <section className="surface-band-light border-b border-accent/25 py-16 sm:py-24" aria-labelledby="gallery-heading">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="section-gold-frame px-5 py-10 sm:px-8">
           <div className="text-center">

@@ -194,7 +194,7 @@ function FaqAnswerBody({ item }: { item: FaqItem }) {
 
 export function Faq() {
   return (
-    <section id="faq" className="border-t border-accent/25 bg-background py-16 sm:py-24" aria-labelledby="faq-heading">
+    <section id="faq" className="surface-band-light border-t border-accent/25 py-16 sm:py-24" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="section-gold-frame px-5 py-10 sm:px-8">
           <div className="text-center">

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Phone, MapPin, Facebook } from 'lucide-react'
+import { Phone, MapPin, Facebook, BadgeCheck } from 'lucide-react'
 import { site } from '@/lib/site'
 
 const quickLinks = [
@@ -83,15 +83,26 @@ export function Footer() {
 
         <div className="mt-10 border-t border-white/15 pt-8">
           <div className="flex flex-col items-center gap-4 text-center">
-            <a
-              href={site.facebookUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex size-11 items-center justify-center rounded-full border-2 border-white/35 bg-white/10 text-white transition-colors hover:border-accent hover:bg-accent/20 hover:text-accent"
-              aria-label="Alfonso's Mobile pet grooming on Facebook (opens in a new tab)"
-            >
-              <Facebook className="size-5" aria-hidden />
-            </a>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={site.facebookUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex size-11 items-center justify-center rounded-full border-2 border-white/35 bg-white/10 text-white transition-colors hover:border-accent hover:bg-accent/20 hover:text-accent"
+                aria-label="Alfonso's Mobile pet grooming on Facebook (opens in a new tab)"
+              >
+                <Facebook className="size-5" aria-hidden />
+              </a>
+              <a
+                href={site.thumbtack.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex size-11 items-center justify-center rounded-full border-2 border-white/35 bg-white/10 text-white transition-colors hover:border-accent hover:bg-accent/20 hover:text-accent"
+                aria-label="Alfonso's mobile grooming on Thumbtack — profile and reviews (opens in a new tab)"
+              >
+                <BadgeCheck className="size-5" aria-hidden />
+              </a>
+            </div>
             <p className="text-sm text-white/55">
               &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>

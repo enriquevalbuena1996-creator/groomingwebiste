@@ -13,6 +13,15 @@ export const site = {
   /** Alfonso's Mobile pet grooming — Facebook profile URL */
   facebookUrl:
     'https://www.facebook.com/people/Alfonsos-Mobile-pet-grooming/100064601895560/?mibextid=wwXIfr&rdid=ke7yrOHlqaf1ZR5M&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18qdpVRQmK%2F%3Fmibextid%3DwwXIfr',
+
+  /** Sarasota mobile grooming listing on Thumbtack (reviews and hire metrics) */
+  thumbtack: {
+    profileUrl:
+      'https://www.thumbtack.com/fl/sarasota/mobile-dog-grooming/alfonsos-mobile-grooming/service/245822262608684131',
+    headlineLabel: 'Exceptional',
+    averageRating: 5,
+    reviewCount: 197,
+  },
   /** Portada: archivo en `public/` (nombre largo de Firefly export) */
   heroVideoSrc:
     '/Firefly Create a cinematic close-up video of a small curly brown toy poodle sitting calmly in a prof.mp4',

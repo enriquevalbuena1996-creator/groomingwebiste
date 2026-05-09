@@ -12,6 +12,7 @@ import {
 } from 'react'
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
 import { customerReviews, googleReviewsSummary, type CustomerReview } from '@/lib/reviews'
+import { site } from '@/lib/site'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
@@ -380,35 +381,73 @@ export function Reviews() {
             )}
           </div>
 
-          <div className="mt-12 flex flex-col items-center gap-4 border-t border-accent/25 pt-10 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">Google Reviews</p>
-            <div
-              className="flex flex-col items-center gap-3 sm:flex-row sm:gap-6"
-              role="img"
-              aria-label={`${googleReviewsSummary.averageRating} stars average rating from ${googleReviewsSummary.reviewCount} reviews on Google`}
-            >
-              <OverallRatingStars rating={googleReviewsSummary.averageRating} />
-              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-                <span className="font-heading text-3xl font-bold tabular-nums text-accent sm:text-4xl">
-                  {googleReviewsSummary.averageRating.toFixed(1)}
-                </span>
-                <span className="hidden h-10 w-px bg-border sm:block" aria-hidden />
-                <span className="max-w-[16rem] text-pretty text-sm leading-snug text-muted-foreground sm:max-w-none sm:text-base">
-                  Based on{' '}
-                  <span className="font-semibold text-foreground">{googleReviewsSummary.reviewCount}</span>{' '}
-                  reviews on Google
-                </span>
+          <div className="mt-12 border-t border-accent/25 pt-10">
+            <div className="grid gap-10 md:grid-cols-2 md:gap-12">
+              <div className="flex flex-col items-center gap-4 text-center md:items-center">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  Google Reviews
+                </p>
+                <div
+                  className="flex flex-col items-center gap-3 sm:flex-row sm:gap-6"
+                  role="img"
+                  aria-label={`${googleReviewsSummary.averageRating} stars average rating from ${googleReviewsSummary.reviewCount} reviews on Google`}
+                >
+                  <OverallRatingStars rating={googleReviewsSummary.averageRating} />
+                  <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+                    <span className="font-heading text-3xl font-bold tabular-nums text-accent sm:text-4xl">
+                      {googleReviewsSummary.averageRating.toFixed(1)}
+                    </span>
+                    <span className="hidden h-10 w-px bg-border sm:block" aria-hidden />
+                    <span className="max-w-[16rem] text-pretty text-sm leading-snug text-muted-foreground sm:max-w-none sm:text-base">
+                      Based on{' '}
+                      <span className="font-semibold text-foreground">{googleReviewsSummary.reviewCount}</span>{' '}
+                      reviews on Google
+                    </span>
+                  </div>
+                </div>
+                <a
+                  href={googleReviewsSummary.searchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-heading text-base font-semibold text-primary underline-offset-4 transition-colors hover:text-accent hover:underline"
+                >
+                  See all reviews on Google
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </div>
+
+              <div className="flex flex-col items-center gap-4 border-t border-accent/20 pt-10 text-center md:border-t-0 md:border-l md:pt-0 md:pl-10">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">Thumbtack</p>
+                <div
+                  className="flex flex-col items-center gap-3 sm:flex-row sm:gap-6"
+                  role="img"
+                  aria-label={`${site.thumbtack.headlineLabel} ${site.thumbtack.averageRating} stars from ${site.thumbtack.reviewCount} reviews on Thumbtack`}
+                >
+                  <OverallRatingStars rating={site.thumbtack.averageRating} />
+                  <div className="flex max-w-xl flex-col items-center gap-1 sm:items-start">
+                    <span className="rounded-full bg-emerald-400/18 px-3 py-0.5 text-xs font-semibold uppercase tracking-wide text-emerald-200">
+                      {site.thumbtack.headlineLabel} {site.thumbtack.averageRating.toFixed(1)}
+                    </span>
+                    <span className="text-pretty text-sm leading-snug text-muted-foreground sm:text-base">
+                      <span className="font-semibold text-foreground">{site.thumbtack.reviewCount}</span> reviews · Hired{' '}
+                      204+ times · Top Pro · 26 years in business
+                    </span>
+                  </div>
+                </div>
+                <p className="max-w-md text-sm text-muted-foreground">
+                  See Alfonso&apos;s verified profile on Thumbtack for more customer reviews and to request pricing.
+                </p>
+                <a
+                  href={site.thumbtack.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-heading text-base font-semibold text-primary underline-offset-4 transition-colors hover:text-accent hover:underline"
+                >
+                  Open Thumbtack profile
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
               </div>
             </div>
-            <a
-              href={googleReviewsSummary.searchUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-heading text-base font-semibold text-primary underline-offset-4 transition-colors hover:text-accent hover:underline"
-            >
-              See all reviews on Google
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
           </div>
         </div>
       </div>

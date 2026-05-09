@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Phone, MapPin, Navigation, Clock, Facebook, Instagram } from 'lucide-react'
+import { Phone, MapPin, Navigation, Clock, Facebook, Instagram, BadgeCheck } from 'lucide-react'
 import { site } from '@/lib/site'
 
 const contactInfo = [
@@ -74,7 +74,7 @@ export function Contact() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <span className="text-sm text-muted-foreground">Follow us:</span>
                 <a
                   href={site.facebookUrl}
@@ -84,6 +84,15 @@ export function Contact() {
                   aria-label="Facebook"
                 >
                   <Facebook className="size-5" />
+                </a>
+                <a
+                  href={site.thumbtack.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex size-10 items-center justify-center rounded-full border-2 border-accent/60 bg-accent/20 text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                  aria-label="Thumbtack — reviews and verified profile"
+                >
+                  <BadgeCheck className="size-5" />
                 </a>
                 <a
                   href="#"

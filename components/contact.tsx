@@ -77,7 +77,9 @@ export function Contact() {
               <div className="flex items-center gap-4">
                 <span className="text-sm text-muted-foreground">Follow us:</span>
                 <a
-                  href="#"
+                  href={site.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex size-10 items-center justify-center rounded-full border-2 border-accent/60 bg-accent/20 text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
                   aria-label="Facebook"
                 >

@@ -31,12 +31,12 @@ export function About() {
         <div className="section-gold-frame px-5 py-10 sm:px-8 sm:py-12">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative order-2 lg:order-1">
-              <div className="overflow-hidden rounded-2xl shadow-xl ring-2 ring-accent ring-offset-4 ring-offset-background">
+              <div className="overflow-hidden rounded-2xl shadow-lg">
                 <Image
-                  src="/images/about-grooming.jpg"
-                  alt="Professional groomer caring for a dog"
-                  width={600}
-                  height={500}
+                  src="/main.jpg"
+                  alt="Professional groomer with a happy dog in a stainless steel grooming tub"
+                  width={1200}
+                  height={800}
                   className="aspect-[4/3] object-cover"
                 />
               </div>

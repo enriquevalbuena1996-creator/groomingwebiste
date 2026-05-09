@@ -1,14 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Phone, MapPin } from 'lucide-react'
+import { Phone, MapPin, Facebook } from 'lucide-react'
 import { site } from '@/lib/site'
 
 const quickLinks = [
-  { href: '#services', label: 'Services' },
-  { href: '#about', label: 'About Us' },
-  { href: '#areas', label: 'Service Areas' },
-  { href: '#quote', label: 'Request Quote' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#about', label: 'About Us' },
+  { href: '/#areas', label: 'Service Areas' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/#quote', label: 'Request Quote' },
+  { href: '/#contact', label: 'Contact' },
 ]
 
 export function Footer() {
@@ -79,10 +81,21 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/15 pt-8 text-center text-sm text-white/55">
-          <p>
-            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
-          </p>
+        <div className="mt-10 border-t border-white/15 pt-8">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <a
+              href={site.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex size-11 items-center justify-center rounded-full border-2 border-white/35 bg-white/10 text-white transition-colors hover:border-accent hover:bg-accent/20 hover:text-accent"
+              aria-label="Alfonso's Mobile pet grooming on Facebook (opens in a new tab)"
+            >
+              <Facebook className="size-5" aria-hidden />
+            </a>
+            <p className="text-sm text-white/55">
+              &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

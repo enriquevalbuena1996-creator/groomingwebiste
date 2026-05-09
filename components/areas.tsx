@@ -37,6 +37,18 @@ export function Areas() {
             ))}
           </div>
 
+          <div className="relative mx-auto mt-12 aspect-[4/3] w-full max-w-4xl overflow-hidden rounded-xl border-2 border-accent/40 shadow-[0_8px_30px_rgba(0,0,0,0.12)] ring-1 ring-accent/20">
+            <iframe
+              src="https://www.google.com/maps/d/u/0/embed?mid=1bYsY3Y3Ip_LSbTed1hxpLPKJWUBsXBY&ehbc=2E312F&noprof=1"
+              title="Map of service areas"
+              width={640}
+              height={480}
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+
           <div className="mt-12 text-center">
             <p className="text-muted-foreground">
               Travel fees may apply for locations outside our primary service area.

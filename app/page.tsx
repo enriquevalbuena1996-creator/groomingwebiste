@@ -1,12 +1,14 @@
 import { Header } from '@/components/header'
 import { Hero } from '@/components/hero'
 import { Services } from '@/components/services'
+import { MobileService } from '@/components/mobile-service'
+import { Reviews } from '@/components/reviews'
 import { QuoteForm } from '@/components/quote-form'
 import { About } from '@/components/about'
 import { Areas } from '@/components/areas'
 import { Contact } from '@/components/contact'
 import { Footer } from '@/components/footer'
-import { StickyCallButton } from '@/components/sticky-call-button'
+import { StickyFloatingActions } from '@/components/sticky-floating-actions'
 
 export default function Home() {
   return (
@@ -15,13 +17,15 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Services />
+        <MobileService />
+        <Reviews />
         <QuoteForm />
         <About />
         <Areas />
         <Contact />
       </main>
       <Footer />
-      <StickyCallButton />
+      <StickyFloatingActions />
     </div>
   )
 }

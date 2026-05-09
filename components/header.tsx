@@ -6,13 +6,122 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Phone, Menu, X } from 'lucide-react'
 import { site } from '@/lib/site'
+import { cn } from '@/lib/utils'
 
 const navLinks = [
-  { href: '#services', label: 'Services' },
-  { href: '#about', label: 'About Us' },
-  { href: '#areas', label: 'Service Areas' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#reviews', label: 'Reviews' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/#about', label: 'About Us' },
+  { href: '/#areas', label: 'Service Areas' },
+  { href: '/faq', label: 'FAQ' },
 ]
+
+function BrandLogoLink({ className }: { className?: string }) {
+  return (
+    <Link href="/" className={cn('relative z-[211] flex min-w-0 items-center gap-2 sm:gap-3', className)}>
+      <Image
+        src={site.logoSrc}
+        alt=""
+        width={180}
+        height={84}
+        className="h-[48px] w-auto max-w-[min(100%,160px)] shrink-0 object-contain object-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:h-[54px] sm:max-w-[200px]"
+        priority
+        aria-hidden
+      />
+      <span className="min-w-0 max-w-[11rem] font-semibold uppercase leading-tight tracking-wide text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)] sm:max-w-[20rem] sm:text-sm md:text-base">
+        <span className="flex flex-col gap-0.5 sm:hidden">
+          {site.nameLines.map((line) => (
+            <span key={line}>{line.toUpperCase()}</span>
+          ))}
+        </span>
+        <span className="hidden sm:inline">{site.name.toUpperCase()}</span>
+      </span>
+    </Link>
+  )
+}
+
+function HeaderCtas({ className }: { className?: string }) {
+  return (
+    <div className={cn('flex shrink-0 items-center gap-2 sm:gap-3', className)}>
+      <Button variant="gold" size="sm" className="shrink-0 gap-2 whitespace-nowrap px-3 text-[0.8125rem] xl:text-sm" asChild>
+        <a href={`tel:${site.phoneTel}`}>
+          <Phone className="size-4 shrink-0" aria-hidden />
+          {site.phoneDisplay}
+        </a>
+      </Button>
+      <Button size="sm" variant="gold" className="shrink-0 whitespace-nowrap px-3 text-[0.8125rem] shadow-md xl:text-sm" asChild>
+        <a href="/#quote">Request Quote</a>
+      </Button>
+    </div>
+  )
+}
+
+function NavAnchors({
+  variant,
+  linkClassName,
+  onNavigate,
+}: {
+  variant: 'inline' | 'stacked'
+  linkClassName: string
+  onNavigate?: () => void
+}) {
+  const navCls =
+    variant === 'stacked'
+      ? 'flex w-full flex-col space-y-1'
+      : 'flex flex-row flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:gap-x-6'
+
+  return (
+    <nav aria-label="Main navigation" className={navCls}>
+      {navLinks.map((link) => (
+        <Link key={link.href} href={link.href} onClick={onNavigate} className={linkClassName}>
+          {link.label}
+        </Link>
+      ))}
+    </nav>
+  )
+}
+
+/** Desktop xl+: single row — nav centered, CTAs isolated on the right (no overlap). */
+function HeaderBarXl() {
+  return (
+    <div className="relative z-[210] mx-auto hidden h-[4.25rem] w-full max-w-7xl items-center gap-4 px-4 sm:px-6 xl:flex xl:justify-between xl:gap-6 lg:px-8">
+      <BrandLogoLink className="max-w-[min(100%,18rem)] shrink-0 2xl:max-w-none" />
+      <nav
+        aria-label="Main navigation"
+        className="flex min-w-0 flex-1 flex-nowrap items-center justify-center gap-x-3 px-2 sm:gap-x-5 [&_a]:whitespace-nowrap 2xl:gap-x-7"
+      >
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="text-sm font-medium tracking-wide text-white/75 transition-colors hover:text-accent 2xl:text-[0.9375rem]"
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+      <HeaderCtas className="shrink-0 pl-4 2xl:pl-6" />
+    </div>
+  )
+}
+
+/** md–lg / mid screens: logo + CTAs row, then full-width centered nav row (nothing sits under the buttons). */
+function HeaderStackedMd() {
+  return (
+    <div className="relative z-[210] mx-auto hidden w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 md:flex xl:hidden lg:gap-4 lg:px-8">
+      <div className="flex items-center justify-between gap-4">
+        <BrandLogoLink className="min-w-0 shrink" />
+        <HeaderCtas />
+      </div>
+      <NavAnchors
+        variant="inline"
+        linkClassName="text-sm font-medium tracking-wide text-white/80 transition-colors hover:text-accent"
+      />
+      <div className="h-px w-full shrink-0 bg-white/12" aria-hidden />
+    </div>
+  )
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -30,54 +139,12 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-[200] w-full overflow-visible border-b-[3px] border-accent bg-brand-navy text-white shadow-[0_8px_30px_-10px_rgba(0,0,0,0.45)] backdrop-blur-md supports-[backdrop-filter]:bg-brand-navy/95">
-      <div className="relative z-[210] mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="relative z-[211] flex min-w-0 shrink items-center gap-2 sm:gap-3">
-          <Image
-            src={site.logoSrc}
-            alt=""
-            width={180}
-            height={84}
-            className="h-[48px] w-auto max-w-[min(100%,160px)] shrink-0 object-contain object-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:h-[54px] sm:max-w-[200px]"
-            priority
-            aria-hidden
-          />
-          <span className="min-w-0 max-w-[11rem] font-semibold uppercase leading-tight tracking-wide text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)] sm:max-w-[20rem] sm:text-sm md:text-base">
-            <span className="flex flex-col gap-0.5 sm:hidden">
-              {site.nameLines.map((line) => (
-                <span key={line}>{line.toUpperCase()}</span>
-              ))}
-            </span>
-            <span className="hidden sm:inline">{site.name.toUpperCase()}</span>
-          </span>
-        </Link>
-
-        <nav className="hidden items-center gap-7 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium tracking-wide text-white/75 transition-colors hover:text-accent"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden items-center gap-3 md:flex">
-          <Button variant="gold" size="sm" asChild>
-            <a href={`tel:${site.phoneTel}`}>
-              <Phone className="size-4" />
-              {site.phoneDisplay}
-            </a>
-          </Button>
-          <Button size="sm" variant="gold" asChild className="shadow-md">
-            <a href="#quote">Request Quote</a>
-          </Button>
-        </div>
-
+      {/* Phones: single bar + menu */}
+      <div className="relative z-[210] mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between gap-3 px-4 md:hidden sm:px-6">
+        <BrandLogoLink className="shrink min-w-0" />
         <button
           type="button"
-          className="relative z-[212] flex size-11 shrink-0 touch-manipulation items-center justify-center rounded-lg border border-white/25 bg-white/5 text-white md:hidden active:bg-white/15"
+          className="relative z-[212] flex size-11 shrink-0 touch-manipulation items-center justify-center rounded-lg border border-white/25 bg-white/5 text-white active:bg-white/15"
           onClick={() => setMobileMenuOpen((open) => !open)}
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-nav"
@@ -87,7 +154,10 @@ export function Header() {
         </button>
       </div>
 
-      {/* Panel móvil: fixed para que nunca quede bajo el hero / vídeo */}
+      <HeaderStackedMd />
+
+      <HeaderBarXl />
+
       {mobileMenuOpen ? (
         <>
           <button
@@ -102,17 +172,12 @@ export function Header() {
             role="dialog"
             aria-modal="true"
           >
-            <nav className="flex flex-col space-y-1 px-4 py-4 pb-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-lg px-3 py-3 text-base font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-accent"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <div className="flex flex-col space-y-1 px-4 py-4 pb-8">
+              <NavAnchors
+                variant="stacked"
+                onNavigate={() => setMobileMenuOpen(false)}
+                linkClassName="rounded-lg px-3 py-3 text-base font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-accent"
+              />
               <div className="flex flex-col gap-3 pt-4">
                 <Button variant="gold" asChild className="w-full">
                   <a href={`tel:${site.phoneTel}`}>
@@ -121,12 +186,12 @@ export function Header() {
                   </a>
                 </Button>
                 <Button variant="gold" asChild className="w-full shadow-md">
-                  <a href="#quote" onClick={() => setMobileMenuOpen(false)}>
+                  <a href="/#quote" onClick={() => setMobileMenuOpen(false)}>
                     Request Quote
                   </a>
                 </Button>
               </div>
-            </nav>
+            </div>
           </div>
         </>
       ) : null}

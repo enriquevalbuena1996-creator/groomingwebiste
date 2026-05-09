@@ -137,6 +137,23 @@
       inset 0 1px 0 oklch(0.92 0.12 82 / 0.12);
   }
 
+  /** Reviews — carril horizontal infinito (mitad duplicada en el DOM / -50%) */
+  .reviews-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.5rem;
+    animation: reviews-marquee 52s linear infinite;
+    animation-play-state: running;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reviews-marquee-track {
+      animation: none;
+      transform: none;
+    }
+  }
+
   /** Hero — sin cambiar (sigue con textura propia) */
   .bg-brand-hero {
     background-color: var(--brand-navy-deep);
@@ -152,6 +169,16 @@
 footer.site-footer-brand {
   border-top-width: 3px;
   border-top-color: var(--accent);
+}
+
+@keyframes reviews-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 html {

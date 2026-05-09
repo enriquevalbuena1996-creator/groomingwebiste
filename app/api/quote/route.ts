@@ -1,6 +1,9 @@
+import { randomUUID } from 'node:crypto'
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+
+import { site } from '@/lib/site'
 
 const bodySchema = z.object({
   fullName: z.string().min(1).max(200),
@@ -23,14 +26,40 @@ function escapeHtml(text: string) {
     .replaceAll('"', '&quot;')
 }
 
+/** Resend idempotency key: max 256 chars; reuse client `Idempotency-Key` for safe retries */
+function quoteIdempotencyKey(request: Request): string {
+  const header = request.headers.get('Idempotency-Key')?.trim()
+  if (header) return header.slice(0, 256)
+  return `quote-request/${randomUUID()}`.slice(0, 256)
+}
+
+/** `from`: verified domain in production (`Name <noreply@yourdomain>` or plain email); dev fallback only */
+function resolvedFromEmail(): string | null {
+  const configured = process.env.RESEND_FROM_EMAIL?.trim()
+  if (configured) return configured
+  if (process.env.NODE_ENV !== 'production') {
+    return `${site.name} <onboarding@resend.dev>`
+  }
+  return null
+}
+
 export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY
-  const fromEmail = process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev'
-  const toEmail = process.env.QUOTE_TO_EMAIL ?? 'alfonsomobilegrooming@gmail.com'
+  const from = resolvedFromEmail()
+  const notifyTo =
+    process.env.QUOTE_TO_EMAIL?.trim() ?? 'alfonsomobilegrooming@gmail.com'
 
   if (!apiKey) {
     console.error('RESEND_API_KEY is not set')
     return NextResponse.json({ error: 'Email service is not configured.' }, { status: 503 })
+  }
+
+  if (!from) {
+    console.error('RESEND_FROM_EMAIL is not set (required in production)')
+    return NextResponse.json(
+      { error: 'Email sender is not configured (set RESEND_FROM_EMAIL to a verified domain address).' },
+      { status: 503 },
+    )
   }
 
   let json: unknown
@@ -73,12 +102,19 @@ export async function POST(request: Request) {
   `
 
   const resend = new Resend(apiKey)
+  const idempotencyKey = quoteIdempotencyKey(request)
+
   const { data, error } = await resend.emails.send({
-    from: fromEmail,
-    to: toEmail,
+    from,
+    to: [notifyTo],
     replyTo: d.email,
     subject: `Quote request — ${d.fullName} (${d.dogName})`,
     html,
+    idempotencyKey,
+    tags: [
+      { name: 'kind', value: 'quote-request' },
+      { name: 'environment', value: process.env.NODE_ENV === 'production' ? 'production' : 'development' },
+    ],
   })
 
   if (error) {

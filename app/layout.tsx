@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Montserrat } from 'next/font/google'
 import Script from 'next/script'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { SiteJsonLd } from '@/components/json-ld'
@@ -8,6 +9,7 @@ import { SplashRoot } from '@/components/splash-root'
 import { site } from '@/lib/site'
 import { getSiteUrl } from '@/lib/site-url'
 import { GOOGLE_ADS_ID } from '@/lib/google-ads'
+import { GTM_CONTAINER_ID } from '@/lib/gtm'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -100,6 +102,16 @@ export default function RootLayout({
   return (
     <html lang="en-US" className={`dark ${montserrat.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
+            height="0"
+            width="0"
+            title="Google Tag Manager"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        <GoogleTagManager gtmId={GTM_CONTAINER_ID} />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`} strategy="afterInteractive" />
         <Script id="google-ads-gtag" strategy="afterInteractive">
           {`

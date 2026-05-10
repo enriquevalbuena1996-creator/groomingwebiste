@@ -1,6 +1,7 @@
 'use client'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { PhoneLink } from '@/components/phone-link'
 import { site } from '@/lib/site'
 
 type FaqItem =
@@ -171,9 +172,12 @@ function FaqAnswerBody({ item }: { item: FaqItem }) {
     return (
       <p className="text-muted-foreground leading-relaxed">
         {'You can call us directly at '}
-        <a href={`tel:${site.phoneTel}`} className="font-medium text-primary underline-offset-4 hover:text-accent hover:underline">
+        <PhoneLink
+          href={`tel:${site.phoneTel}`}
+          className="font-medium text-primary underline-offset-4 hover:text-accent hover:underline"
+        >
           {site.phoneDisplay}
-        </a>
+        </PhoneLink>
         {' or fill out the '}
         <a href="/#quote" className="font-medium text-primary underline-offset-4 hover:text-accent hover:underline">
           request form

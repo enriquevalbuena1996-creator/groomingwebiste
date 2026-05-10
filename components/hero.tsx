@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Phone, MessageSquare, MapPin } from 'lucide-react'
+import { PhoneLink } from '@/components/phone-link'
 import { site } from '@/lib/site'
 
 export function Hero() {
@@ -83,13 +84,13 @@ export function Hero() {
             asChild
             className="w-full bg-white font-semibold text-brand-navy shadow-[0_8px_28px_rgba(0,0,0,0.4)] hover:bg-white/92 sm:w-auto sm:min-w-[200px]"
           >
-            <a href={`tel:${site.phoneTel}`} className="gap-2 whitespace-normal text-center sm:whitespace-nowrap">
+            <PhoneLink href={`tel:${site.phoneTel}`} className="gap-2 whitespace-normal text-center sm:whitespace-nowrap">
               <Phone className="size-5 shrink-0" aria-hidden />
               <span className="flex flex-col gap-0.5 leading-tight sm:flex-row sm:items-baseline sm:gap-2">
                 <span>Call Now</span>
                 <span className="text-base font-semibold tabular-nums text-brand-navy sm:text-lg">{site.phoneDisplay}</span>
               </span>
-            </a>
+            </PhoneLink>
           </Button>
           <Button size="lg" variant="gold" asChild className="w-full sm:w-auto sm:min-w-[200px]">
             <a href="#quote">

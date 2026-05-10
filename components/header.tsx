@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Phone, Menu, X } from 'lucide-react'
+import { PhoneLink } from '@/components/phone-link'
 import { site } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
@@ -45,10 +46,10 @@ function HeaderCtas({ className }: { className?: string }) {
   return (
     <div className={cn('flex shrink-0 items-center gap-2 sm:gap-3', className)}>
       <Button variant="gold" size="sm" className="shrink-0 gap-2 whitespace-nowrap px-3 text-[0.8125rem] xl:text-sm" asChild>
-        <a href={`tel:${site.phoneTel}`}>
+        <PhoneLink href={`tel:${site.phoneTel}`}>
           <Phone className="size-4 shrink-0" aria-hidden />
           {site.phoneDisplay}
-        </a>
+        </PhoneLink>
       </Button>
       <Button size="sm" variant="gold" className="shrink-0 whitespace-nowrap px-3 text-[0.8125rem] shadow-md xl:text-sm" asChild>
         <a href="/#quote">Request Quote</a>
@@ -180,10 +181,10 @@ export function Header() {
               />
               <div className="flex flex-col gap-3 pt-4">
                 <Button variant="gold" asChild className="w-full">
-                  <a href={`tel:${site.phoneTel}`}>
+                  <PhoneLink href={`tel:${site.phoneTel}`}>
                     <Phone className="size-4" />
                     {site.phoneDisplay}
-                  </a>
+                  </PhoneLink>
                 </Button>
                 <Button variant="gold" asChild className="w-full shadow-md">
                   <a href="/#quote" onClick={() => setMobileMenuOpen(false)}>

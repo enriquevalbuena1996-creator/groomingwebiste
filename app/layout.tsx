@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from 'next'
 import { Montserrat } from 'next/font/google'
+import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { SiteJsonLd } from '@/components/json-ld'
 import { SplashRoot } from '@/components/splash-root'
 import { site } from '@/lib/site'
 import { getSiteUrl } from '@/lib/site-url'
+import { GOOGLE_ADS_ID } from '@/lib/google-ads'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -98,6 +100,15 @@ export default function RootLayout({
   return (
     <html lang="en-US" className={`dark ${montserrat.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`} strategy="afterInteractive" />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ADS_ID}');
+          `}
+        </Script>
         <SiteJsonLd />
         <SplashRoot />
         {children}

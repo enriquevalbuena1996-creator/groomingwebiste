@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Phone, MapPin, Navigation, Clock, Facebook, Instagram, BadgeCheck } from 'lucide-react'
+import { PhoneLink } from '@/components/phone-link'
 import { site } from '@/lib/site'
 
 const contactInfo = [
@@ -57,15 +58,21 @@ export function Contact() {
                       <div>
                         <p className="text-sm text-muted-foreground">{item.label}</p>
                         {item.href ? (
-                          <a
-                            href={item.href}
-                            {...(item.href.startsWith('http')
-                              ? { target: '_blank', rel: 'noopener noreferrer' }
-                              : {})}
-                            className="font-medium text-foreground hover:text-accent"
-                          >
-                            {item.value}
-                          </a>
+                          item.href.startsWith('tel:') ? (
+                            <PhoneLink href={item.href} className="font-medium text-foreground hover:text-accent">
+                              {item.value}
+                            </PhoneLink>
+                          ) : (
+                            <a
+                              href={item.href}
+                              {...(item.href.startsWith('http')
+                                ? { target: '_blank', rel: 'noopener noreferrer' }
+                                : {})}
+                              className="font-medium text-foreground hover:text-accent"
+                            >
+                              {item.value}
+                            </a>
+                          )
                         ) : (
                           <p className="font-medium text-foreground">{item.value}</p>
                         )}
@@ -134,10 +141,10 @@ export function Contact() {
                     asChild
                     className="bg-brand-navy font-semibold text-white shadow-[0_6px_20px_rgba(6,21,40,0.45)] hover:bg-brand-navy/92 [&_svg]:text-white"
                   >
-                    <a href={`tel:${site.phoneTel}`}>
+                    <PhoneLink href={`tel:${site.phoneTel}`}>
                       <Phone className="size-5" />
                       Call {site.phoneDisplay}
-                    </a>
+                    </PhoneLink>
                   </Button>
                   <Button
                     size="lg"

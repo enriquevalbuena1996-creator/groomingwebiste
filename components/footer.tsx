@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, MapPin, Facebook, BadgeCheck } from 'lucide-react'
+import { PhoneLink } from '@/components/phone-link'
 import { site } from '@/lib/site'
 
 const quickLinks = [
@@ -61,13 +62,13 @@ export function Footer() {
           <div>
             <h3 className="font-heading text-lg font-semibold tracking-wide text-white">Contact Us</h3>
             <div className="mt-4 space-y-3">
-              <a
+              <PhoneLink
                 href={`tel:${site.phoneTel}`}
                 className="flex items-center gap-2 text-sm text-white/75 transition-colors hover:text-accent"
               >
                 <Phone className="size-4 shrink-0 text-accent" />
                 {site.phoneDisplay}
-              </a>
+              </PhoneLink>
               <a
                 href={site.mapsUrl}
                 target="_blank"

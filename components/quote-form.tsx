@@ -19,6 +19,7 @@ const services = [
   'Puppy Grooming',
   'Senior Dog Grooming',
   'Flea & Tick Bath',
+  'Other',
 ]
 
 /** Select nativo con el mismo aspecto que los inputs (los Radix Select fallaban al abrir por z-index/portal). */

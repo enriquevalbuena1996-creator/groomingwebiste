@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Phone, Send } from 'lucide-react'
 import { site } from '@/lib/site'
+import { PhoneLink } from '@/components/phone-link'
 import { Button } from '@/components/ui/button'
 
 /** Fixed CTAs: Request Quote (+ call on smaller screens only, above quote). */
@@ -26,9 +27,9 @@ export function StickyFloatingActions() {
         className="pointer-events-auto size-14 rounded-full shadow-lg ring-2 ring-accent/80 ring-offset-2 ring-offset-background md:hidden"
         asChild
       >
-        <a href={`tel:${site.phoneTel}`} aria-label={`Call ${site.phoneDisplay}`}>
+        <PhoneLink href={`tel:${site.phoneTel}`} aria-label={`Call ${site.phoneDisplay}`}>
           <Phone className="size-6" aria-hidden />
-        </a>
+        </PhoneLink>
       </Button>
     </div>
   )

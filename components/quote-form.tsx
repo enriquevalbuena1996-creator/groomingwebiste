@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent } from '@/components/ui/card'
 import { Send, CheckCircle } from 'lucide-react'
+import { gtag_report_lead_form_conversion } from '@/lib/google-ads'
 import { cn } from '@/lib/utils'
 
 const dogSizes = ['Small (under 20 lbs)', 'Medium (20-50 lbs)', 'Large (50-80 lbs)', 'Extra Large (80+ lbs)']
@@ -67,6 +68,7 @@ export function QuoteForm() {
         return
       }
 
+      gtag_report_lead_form_conversion()
       form.reset()
       setSubmitted(true)
     } catch {

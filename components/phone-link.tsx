@@ -1,11 +1,22 @@
 'use client'
 
-import { forwardRef, type AnchorHTMLAttributes } from 'react'
+import { forwardRef, type AnchorHTMLAttributes, type MouseEvent } from 'react'
+import { gtag_report_click_to_call_conversion } from '@/lib/google-ads'
 
-/** Same as `<a>`; conversions can be configured in Google Tag Manager if needed. */
+/** `tel:` links fire Google Ads “Click to call website” conversion, then open the dialer. */
 export const PhoneLink = forwardRef<HTMLAnchorElement, AnchorHTMLAttributes<HTMLAnchorElement>>(function PhoneLink(
-  props,
+  { onClick, href, ...props },
   ref,
 ) {
-  return <a ref={ref} {...props} />
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    onClick?.(e)
+    if (e.defaultPrevented) return
+    const h = typeof href === 'string' ? href : ''
+    if (h.startsWith('tel:')) {
+      e.preventDefault()
+      gtag_report_click_to_call_conversion(h)
+    }
+  }
+
+  return <a ref={ref} href={href} {...props} onClick={handleClick} />
 })

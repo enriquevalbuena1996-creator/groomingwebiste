@@ -54,7 +54,7 @@ function GalleryPhoto({ badge, src, alt }: { badge: string; src: string; alt: st
         'bg-muted/40',
       )}
     >
-      <Image src={src} alt={alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+      <Image src={src} alt={alt} fill className="object-contain object-center" sizes="(max-width: 768px) 100vw, 50vw" />
       <span
         className={cn(
           'absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider backdrop-blur-sm',

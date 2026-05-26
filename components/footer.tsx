@@ -6,6 +6,7 @@ import { site } from '@/lib/site'
 
 const quickLinks = [
   { href: '/#services', label: 'Services' },
+  { href: '/bath-packages', label: 'Bath Packages' },
   { href: '/#about', label: 'About Us' },
   { href: '/#areas', label: 'Service Areas' },
   { href: '/gallery', label: 'Gallery' },

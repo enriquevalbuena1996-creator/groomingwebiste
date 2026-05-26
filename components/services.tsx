@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Bath, Bug, Dog, Ear, HandMetal, Heart, Scissors, Wind, type LucideIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 /** Filenames must match files in `public/` exactly (URLs encode spaces). */
 function publicAssetUrl(filename: string): string {
@@ -21,6 +22,7 @@ type ServiceItem = {
   title: string
   description: string
   imageFilename?: string
+  href?: string
 }
 
 const services: ServiceItem[] = [
@@ -37,6 +39,7 @@ const services: ServiceItem[] = [
     description:
       'Premium shampoo and conditioner, brush-out and blow-dry for a soft, shiny, fresh-smelling coat.',
     imageFilename: 'bath y brush.jpg',
+    href: '/bath-packages',
   },
   {
     icon: HandMetal,
@@ -121,10 +124,11 @@ function ServicePlaceholderCard({ icon: Icon }: { icon: LucideIcon }) {
 function ServiceMarketingCard({ service }: { service: ServiceItem }) {
   const hasPhoto = Boolean(service.imageFilename)
   const sid = serviceSlug(service.title)
+  const href = service.href ?? '/#quote'
 
   return (
     <Link
-      href="/#quote"
+      href={href}
       className="group relative isolate flex aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)] ring-1 ring-black/15 outline-offset-4 transition-[transform,box-shadow] duration-300 hover:scale-[1.02] hover:shadow-[0_16px_48px_-14px_oklch(0.76_0.17_82_/_0.35)] focus-visible:outline-2 focus-visible:outline-accent sm:aspect-[3/4] lg:aspect-[10/13]"
       aria-labelledby={`svc-${sid}`}
     >
@@ -180,6 +184,15 @@ export function Services() {
           {services.map((svc) => (
             <ServiceMarketingCard key={svc.title} service={svc} />
           ))}
+        </div>
+
+        <div className="mt-12 flex justify-center sm:mt-14">
+          <Button variant="gold" size="lg" className="gap-2 shadow-md" asChild>
+            <Link href="/bath-packages">
+              Read more about our Bath Packages
+              <ArrowRight className="size-4 shrink-0" aria-hidden />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 
 const navLinks = [
   { href: '/#services', label: 'Services' },
+  { href: '/bath-packages', label: 'Bath Packages' },
   { href: '/#reviews', label: 'Reviews' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/#about', label: 'About Us' },
@@ -83,34 +84,34 @@ function NavAnchors({
   )
 }
 
-/** Desktop xl+: single row — nav centered, CTAs isolated on the right (no overlap). */
+/** Desktop 2xl+: single row — grid keeps nav from overlapping CTAs. */
 function HeaderBarXl() {
   return (
-    <div className="relative z-[210] mx-auto hidden h-[4.25rem] w-full max-w-7xl items-center gap-4 px-4 sm:px-6 xl:flex xl:justify-between xl:gap-6 lg:px-8">
-      <BrandLogoLink className="max-w-[min(100%,18rem)] shrink-0 2xl:max-w-none" />
+    <div className="relative z-[210] mx-auto hidden h-[4.25rem] w-full max-w-7xl grid-cols-[minmax(0,auto)_minmax(0,1fr)_auto] items-center gap-3 px-4 sm:px-6 lg:px-8 2xl:grid 2xl:gap-4">
+      <BrandLogoLink className="max-w-[min(100%,16rem)] shrink-0 2xl:max-w-[18rem]" />
       <nav
         aria-label="Main navigation"
-        className="flex min-w-0 flex-1 flex-nowrap items-center justify-center gap-x-3 px-2 sm:gap-x-5 [&_a]:whitespace-nowrap 2xl:gap-x-7"
+        className="flex min-w-0 items-center justify-center gap-x-3 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&_a]:shrink-0 [&_a]:whitespace-nowrap 2xl:gap-x-4 min-[1800px]:gap-x-6"
       >
         {navLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className="text-sm font-medium tracking-wide text-white/75 transition-colors hover:text-accent 2xl:text-[0.9375rem]"
+            className="text-[0.8125rem] font-medium tracking-wide text-white/75 transition-colors hover:text-accent 2xl:text-sm min-[1800px]:text-[0.9375rem]"
           >
             {link.label}
           </Link>
         ))}
       </nav>
-      <HeaderCtas className="shrink-0 pl-4 2xl:pl-6" />
+      <HeaderCtas className="relative z-[212] shrink-0 justify-self-end pl-2 2xl:pl-4" />
     </div>
   )
 }
 
-/** md–lg / mid screens: logo + CTAs row, then full-width centered nav row (nothing sits under the buttons). */
+/** md–xl / mid screens: logo + CTAs row, then full-width centered nav row (nothing sits under the buttons). */
 function HeaderStackedMd() {
   return (
-    <div className="relative z-[210] mx-auto hidden w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 md:flex xl:hidden lg:gap-4 lg:px-8">
+    <div className="relative z-[210] mx-auto hidden w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 md:flex 2xl:hidden lg:gap-4 lg:px-8">
       <div className="flex items-center justify-between gap-4">
         <BrandLogoLink className="min-w-0 shrink" />
         <HeaderCtas />

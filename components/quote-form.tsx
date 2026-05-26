@@ -14,7 +14,8 @@ const dogSizes = ['Small (under 20 lbs)', 'Medium (20-50 lbs)', 'Large (50-80 lb
 const services = [
   'Full Grooming',
   'Bath & Brush',
-  'Nail Trimming',
+  'Doodle & Bichon Premium Bath Package',
+  'Short Hair Bath Package',
   'Ear Cleaning',
   'De-shedding Treatment',
   'Puppy Grooming',
